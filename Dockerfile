@@ -1,10 +1,11 @@
-FROM node:20-slim AS frontend
+FROM node:22-slim AS frontend
 WORKDIR /app
 
-RUN npm install -g corepack@latest && corepack use pnpm@latest
+ENV PNPM_HOME=/pnpm
+RUN corepack enable && corepack prepare pnpm@10.34.5 --activate
 
 COPY package.json pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm config set store-dir /pnpm/store && pnpm install --frozen-lockfile
 
 COPY . .
 RUN pnpm run build
