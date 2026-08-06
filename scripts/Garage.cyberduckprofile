@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Protocol</key>
+    <string>s3</string>
+    <key>Vendor</key>
+    <string>garage</string>
+    <key>Description</key>
+    <string>Garage S3 (path style, region garage)</string>
+    <key>Hostname Configurable</key>
+    <true/>
+    <key>Default Port</key>
+    <string>443</string>
+    <key>Port Configurable</key>
+    <false/>
+    <key>Scheme</key>
+    <string>https</string>
+    <key>Schemes</key>
+    <array>
+        <string>https</string>
+    </array>
+    <key>Authorization</key>
+    <string>AWS4-HMAC-SHA256</string>
+    <key>Region</key>
+    <string>garage</string>
+    <key>Regions</key>
+    <array>
+        <string>garage</string>
+    </array>
+    <key>Properties</key>
+    <array>
+        <string>s3.bucket.virtualhost.disable=true</string>
+    </array>
+</dict>
+</plist>
