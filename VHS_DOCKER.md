@@ -70,6 +70,31 @@ a číst secret klíče přes `GET /api/v2/GetKeyInfo?showSecretKey=true`.
 Skript se interaktivně zeptá na heslo (neukládá ho do historie shellu ani ho nedává do `ps`)
 a vypíše hotovou hodnotu.
 
+#### Bez skriptu, přímo na příkazové řádce
+
+Když nemáš repozitář po ruce (typicky při práci přímo na serveru), stačí `htpasswd`
+z balíčku `apache2-utils`. Bez `-b` se na heslo doptá a neechuje ho, takže neskončí
+v historii shellu ani v `ps`:
+
+```sh
+htpasswd -nBC 10 admin
+```
+
+Vypíše rovnou celý řádek `admin:$2y$10$…`, který je hodnotou `AUTH_USER_PASS`.
+`-n` znamená vypsat na stdout místo zápisu do souboru, `-B` bcrypt, `-C 10` cost faktor.
+
+Jednořádkově, ale s heslem v historii i v `ps` — použij jen když ti to nevadí:
+
+```sh
+htpasswd -nbBC 10 admin 'HESLO'
+```
+
+Když `htpasswd` na stroji není a nechceš nic instalovat:
+
+```sh
+docker run --rm -it httpd:alpine htpasswd -nBC 10 admin
+```
+
 Na co pozor:
 
 - **Musí to být bcrypt** (`htpasswd -B`). Ověřuje se přes `golang.org/x/crypto/bcrypt`
